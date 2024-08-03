@@ -55,6 +55,9 @@
 /mnt/vendor/persist/dual_camera_calibration(/.*)?    u:object_r:persist_camera_file:s0
 /mnt/vendor/persist/engineermode(/.*)?               u:object_r:persist_engineer_file:s0
 
+# Sensors - data
+/data/vendor/sensor_log(/.*)?                                      u:object_r:vendor_sensor_log_data_file:s0
+
 # Socket files
 /dev/socket/vl53l1_daemon    u:object_r:vl53l1_socket:s0
 
