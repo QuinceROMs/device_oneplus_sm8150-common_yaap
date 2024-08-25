@@ -243,12 +243,12 @@ vendor/etc/cne/profileSlm.xml
 vendor/etc/cne/slm.conf
 vendor/etc/init/cnd.rc
 vendor/etc/default-permissions/com.qualcomm.qti.cne.xml
-vendor/lib64/libcne.so
+vendor/lib64/libcne.so;DISABLE_CHECKELF
 vendor/lib64/libcneapiclient.so
 vendor/lib64/libcneoplookup.so
 vendor/lib64/libcneqmiutils.so
 vendor/lib64/libwms.so
-vendor/lib64/libwqe.so
+vendor/lib64/libwqe.so;DISABLE_CHECKELF
 vendor/lib64/libxml.so
 vendor/lib64/vendor.qti.data.factory@2.0.so
 vendor/lib64/vendor.qti.data.factory@2.1.so
@@ -409,7 +409,7 @@ vendor/firmware/a640_zap.mdt
 # GNSS
 vendor/bin/hw/android.hardware.gnss@2.1-service-qti
 vendor/bin/loc_launcher
-vendor/bin/lowi-server
+vendor/bin/lowi-server;DISABLE_CHECKELF
 vendor/bin/mlid
 vendor/bin/slim_daemon
 vendor/bin/xtra-daemon
@@ -468,7 +468,7 @@ system_ext/framework/com.android.hotwordenrollment.common.util.jar
 
 # IMS
 vendor/bin/ims_rtp_daemon
-vendor/bin/imsdatadaemon
+vendor/bin/imsdatadaemon;DISABLE_CHECKELF
 vendor/bin/imsqmidaemon
 vendor/bin/imsrcsd
 vendor/etc/init/ims_rtp_daemon.rc
@@ -607,8 +607,8 @@ vendor/lib/libOmxG711Dec.so
 vendor/lib/libOmxQcelp13Dec.so
 vendor/lib/libOmxSwVdec.so
 vendor/lib/libOmxSwVencMpeg4.so
-vendor/lib/libOmxVideoDSMode.so
-vendor/lib/libOmxVpp.so
+vendor/lib/libOmxVideoDSMode.so;DISABLE_CHECKELF
+vendor/lib/libOmxVpp.so;DISABLE_CHECKELF
 vendor/lib/libOmxWmaDec.so
 vendor/lib/libswvdec.so
 vendor/lib64/libAlacSwDec.so
@@ -1000,7 +1000,7 @@ vendor/lib/libwfdhdcpcp.so|4522505c0ad5a2fb5bb8e05bf4b5486f8ee1b77c
 vendor/lib/libwfdhdcpservice_proprietary.so|2c0e1cc8f1b601bb5f3ea30261bf18718c81da91
 vendor/lib/libwfdmminterface_proprietary.so|a63d2c309ec5d86f0db036eaf23ea1ea400e6978
 vendor/lib/libwfdmmservice_proprietary.so|a2e5a10e37319e5afe16f3d0235be365b4acecc2
-vendor/lib/libwfdmmsrc_proprietary.so|e45df0322047507baae1b43b9017ee4268039c4e
+vendor/lib/libwfdmmsrc_proprietary.so|e45df0322047507baae1b43b9017ee4268039c4e;DISABLE_CHECKELF
 vendor/lib/libwfdmodulehdcpsession.so|b2633026ad6990603a9a84202445dcb8f76ecffd
 vendor/lib/libwfdrtsp_proprietary.so|e719d1a1d1b6f49acbdab6034b7a05911d6e0ff3
 vendor/lib/libwfdsessionmodule.so|129c7fc06dca76c029cb24de541b6ae2f1427b3c
