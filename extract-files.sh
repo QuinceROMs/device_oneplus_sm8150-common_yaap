@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# Copyright (C) 2016 The CyanogenMod Project
-# Copyright (C) 2017-2020 The LineageOS Project
+# SPDX-FileCopyrightText: 2016 The CyanogenMod Project
+# SPDX-FileCopyrightText: 2017-2024 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
@@ -13,6 +13,10 @@ MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "${MY_DIR}" ]]; then MY_DIR="${PWD}"; fi
 
 ANDROID_ROOT="${MY_DIR}/../../.."
+
+# If XML files don't have comments before the XML header, use this flag
+# Can still be used with broken XML files by using blob_fixup
+export TARGET_DISABLE_XML_FIXING=true
 
 HELPER="${ANDROID_ROOT}/tools/extract-utils/extract_utils.sh"
 if [ ! -f "${HELPER}" ]; then
@@ -31,25 +35,29 @@ SECTION=
 
 while [ "${#}" -gt 0 ]; do
     case "${1}" in
-        --only-common )
-                ONLY_COMMON=true
-                ;;
-        --only-target )
-                ONLY_TARGET=true
-                ;;
-        -n | --no-cleanup )
-                CLEAN_VENDOR=false
-                ;;
-        -k | --kang )
-                KANG="--kang"
-                ;;
-        -s | --section )
-                SECTION="${2}"; shift
-                CLEAN_VENDOR=false
-                ;;
-        * )
-                SRC="${1}"
-                ;;
+        --only-common)
+            ONLY_COMMON=true
+            ;;
+        --only-firmware)
+            ONLY_FIRMWARE=true
+            ;;
+        --only-target)
+            ONLY_TARGET=true
+            ;;
+        -n | --no-cleanup)
+            CLEAN_VENDOR=false
+            ;;
+        -k | --kang)
+            KANG="--kang"
+            ;;
+        -s | --section)
+            SECTION="${2}"
+            shift
+            CLEAN_VENDOR=false
+            ;;
+        *)
+            SRC="${1}"
+            ;;
     esac
     shift
 done
@@ -61,22 +69,31 @@ fi
 function blob_fixup() {
     case "${1}" in
         system_ext/lib/libwfdservice.so)
+            [ "$2" = "" ] && return 0
             "${PATCHELF}" --replace-needed "android.media.audio.common.types-V2-cpp.so" "android.media.audio.common.types-V3-cpp.so" "${2}"
             ;;
         system_ext/lib64/libwfdnative.so )
+            [ "$2" = "" ] && return 0
             "${PATCHELF}" --remove-needed "android.hidl.base@1.0.so" "${2}"
             ;;
         vendor/bin/hw/qcrild )
+            [ "$2" = "" ] && return 0
             "${PATCHELF}" --add-needed libril_shim.so "${2}"
             ;;
         vendor/lib64/hw/camera.qcom.so )
+            [ "$2" = "" ] && return 0
             grep -q libcamera_metadata_shim.so "${2}" || "${PATCHELF}" --add-needed libcamera_metadata_shim.so "${2}"
             ;;
         vendor/lib64/mediadrm/libwvdrmengine.so|vendor/lib64/libwvhidl.so )
+            [ "$2" = "" ] && return 0
             grep -q "libcrypto-v33.so" "${2}" || "${PATCHELF}" --replace-needed "libcrypto.so" "libcrypto-v33.so" "${2}"
             ;;
         odm/lib/libdlbdsservice_v3_6.so | odm/lib/libstagefright_soft_ddpdec.so | odm/lib/libstagefrightdolby.so | odm/lib64/libdlbdsservice_v3_6.so)
+            [ "$2" = "" ] && return 0
             "${PATCHELF}" --replace-needed "libstagefright_foundation.so" "libstagefright_foundation-v33.so" "${2}"
+            ;;
+        *)
+            return 1
             ;;
     esac
     case "${DEVICE}" in
@@ -88,6 +105,11 @@ function blob_fixup() {
             esac
     ;;
     esac
+
+    return 0
+}
+function blob_fixup_dry() {
+    blob_fixup "$1" ""
 }
 
 if [ -z "${ONLY_TARGET}" ]; then
