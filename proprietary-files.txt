@@ -350,7 +350,7 @@ system_ext/lib64/vendor.qti.diaghal@1.0.so|0158bec299e6bef47604a946145ab321184b2
 # DPM (vendor) - from LA.UM.9.1.r1-11500.02-SMxxx0.QSSI12.0
 vendor/bin/dpmQmiMgr|61a421804559b0e461439c19088acc01b871982a
 vendor/etc/init/dpmQmiMgr.rc|1538743661a5c48c15cd105beaad20f72953885a
-vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so|d9f1aa7f93b928f42499d613d20ccbc60f279097
+vendor/lib64/com.qualcomm.qti.dpm.api@1.0.so|d9f1aa7f93b928f42499d613d20ccbc60f279097;MODULE_SUFFIX=_vendor
 vendor/lib64/libdpmqmihal.so|41eb89e66ba065c43a5eb79cd3c72cef0ee167aa
 
 # DRM - from LA.UM.9.1.r1-11500.02-SMxxx0.QSSI12.0
@@ -512,7 +512,7 @@ vendor/lib64/vendor.qti.ims.rcsconfig@1.1.so
 vendor/lib64/vendor.qti.ims.rcsconfig@2.0.so
 vendor/lib64/vendor.qti.ims.rcsconfig@2.1.so
 vendor/lib64/vendor.qti.imsrtpservice@3.0-service-Impl.so
-vendor/lib64/vendor.qti.imsrtpservice@3.0.so
+vendor/lib64/vendor.qti.imsrtpservice@3.0.so;MODULE_SUFFIX=_vendor
 
 # IMS - from LA.QSSI.12.0.r1-05800.02-qssi.0
 system_ext/lib64/lib-imsvideocodec.so|621285ea1c86cb7f0d74cff8d5464382c36a46a8
@@ -989,7 +989,7 @@ vendor/etc/seccomp_policy/wifidisplayhalservice.policy|f113f27e0e301a18baf0ade08
 vendor/etc/wfdconfig.xml|9e13371f7ae509cc0bbb3f2ace93c5ea5d87bf0f
 vendor/lib/libFileMux_proprietary.so|1e125137fcc2c1843cc14e3ec34fc1068fc6bc14
 vendor/lib/libmm-hdcpmgr.so|057fc29807be0f2527c3026d01dff98cfe9018ad
-vendor/lib/libmmosal.so|37febc914b2c706a5df0009cc134e9d80690aec0
+vendor/lib/libmmosal.so|37febc914b2c706a5df0009cc134e9d80690aec0;MODULE_SUFFIX=_vendor
 vendor/lib/libmmrtpdecoder_proprietary.so|227a26b9ec9ee6f2dc95de47b713b215e8b6c93e
 vendor/lib/libmmrtpencoder_proprietary.so|d0aec32b8e565912ecc475bad40ed626ac1ee04d
 vendor/lib/libwfdcodecv4l2_proprietary.so|e3a67c2aa9f4df8e8274b4d321d5e346420d253d
@@ -1012,5 +1012,5 @@ vendor/lib/libwfduibcsinkinterface_proprietary.so|0fef474153602ed2336c6d23e90694
 vendor/lib/libwfduibcsrc_proprietary.so|11f1152f0da71d978a17a66a883c65763dd08c1e
 vendor/lib/libwfduibcsrcinterface_proprietary.so|bfd97b6d662657234774a3c9c87f8a0670f92dd9
 vendor/lib/libwfdutils_proprietary.so|788cc674ac7ba6e4c985ec9e8515c143f55e881b
-vendor/lib/vendor.qti.hardware.wifidisplaysession@1.0.so|c08e1803c3089ee5da37b0a56eb9c2bdf9aeb4b2
+vendor/lib/vendor.qti.hardware.wifidisplaysession@1.0.so|c08e1803c3089ee5da37b0a56eb9c2bdf9aeb4b2;MODULE_SUFFIX=_vendor
 vendor/lib/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so|fefea0a3279f850e562cfaaf4fe3b24af1dd3994
