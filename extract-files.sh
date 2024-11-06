@@ -72,6 +72,9 @@ function blob_fixup() {
         vendor/lib64/mediadrm/libwvdrmengine.so|vendor/lib64/libwvhidl.so )
             grep -q "libcrypto-v33.so" "${2}" || "${PATCHELF}" --replace-needed "libcrypto.so" "libcrypto-v33.so" "${2}"
             ;;
+        odm/lib/libdlbdsservice_v3_6.so | odm/lib/libstagefright_soft_ddpdec.so | odm/lib/libstagefrightdolby.so | odm/lib64/libdlbdsservice_v3_6.so)
+            "${PATCHELF}" --replace-needed "libstagefright_foundation.so" "libstagefright_foundation-v33.so" "${2}"
+            ;;
     esac
     case "${DEVICE}" in
         hotdog | hotdogb | hotdogg )

@@ -128,18 +128,18 @@ PRODUCT_PACKAGES += \
     audio.bluetooth.default \
     audio.r_submix.default \
     audio.usb.default \
-    libaudio-resampler \
-    libaudioroute \
-    libhdmiedid \
-    libexthwplugin \
-    libhfp \
-    libqcompostprocbundle \
-    libqcomvisualizer \
-    libqcomvoiceprocessing \
-    libsndmonitor \
-    libspkrprot \
-    libtinycompress \
-    libvolumelistener \
+    libaudio-resampler:64 \
+    libaudioroute:64 \
+    libhdmiedid:64 \
+    libexthwplugin:64 \
+    libhfp:64 \
+    libqcompostprocbundle:64 \
+    libqcomvisualizer:64 \
+    libqcomvoiceprocessing:64 \
+    libsndmonitor:64 \
+    libspkrprot:64 \
+    libtinycompress:64 \
+    libvolumelistener:64 \
     tinymix
 
 PRODUCT_COPY_FILES += \
@@ -261,6 +261,10 @@ PRODUCT_VENDOR_PROPERTIES += \
     debug.sf.earlyGl.app.duration=16000000
 endif
 
+# Dolby
+PRODUCT_PACKAGES += \
+    OplusDolby
+
 # DRM
 PRODUCT_PACKAGES += \
     android.hardware.drm@1.4-service.clearkey
@@ -337,6 +341,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:$(TARGET_COPY_OUT_ODM)/etc/media_profiles_V1_0.xml
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/media/media_codecs_vendor_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_vendor_audio.xml \
+    $(LOCAL_PATH)/media/media_codecs_dolby_audio.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_dolby_audio.xml
 
 # Net
 PRODUCT_PACKAGES += \
@@ -471,6 +479,11 @@ PRODUCT_PACKAGES += \
     libpng.vendor:32
 
 PRODUCT_EXTRA_VNDK_VERSIONS := 30
+
+PRODUCT_COPY_FILES += \
+    prebuilts/vndk/v30/arm/arch-arm-armv7-a-neon/shared/vndk-core/libui.so:$(TARGET_COPY_OUT_VENDOR)/lib/libui-v30.so \
+    prebuilts/vndk/v33/arm/arch-arm-armv7-a-neon/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib/libstagefright_foundation-v33.so \
+    prebuilts/vndk/v33/arm64/arch-arm64-armv8-a/shared/vndk-core/libstagefright_foundation.so:$(TARGET_COPY_OUT_VENDOR)/lib64/libstagefright_foundation-v33.so
 
 # Wifi
 PRODUCT_PACKAGES += \
