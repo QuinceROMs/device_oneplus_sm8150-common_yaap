@@ -90,6 +90,9 @@
     <!-- Whether key handler sends intent when changing slider position -->
     <string name="config_alertSliderIntent">com.bliss.device.DeviceSettings.UPDATE_SLIDER</string>
 
+    <!-- Whether the device supports Smart Pixels -->
+    <bool name="config_supportSmartPixels">true</bool>
+
     <!-- Display color inversion availability -->
     <bool name="config_displayInversionAvailable">false</bool>
 
