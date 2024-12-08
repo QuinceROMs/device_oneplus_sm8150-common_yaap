@@ -17,12 +17,6 @@
 */
 package com.yaap.device.DeviceSettings;
 
-import static com.android.internal.util.yaap.AutoSettingConsts.MODE_DISABLED;
-import static com.android.internal.util.yaap.AutoSettingConsts.MODE_NIGHT;
-import static com.android.internal.util.yaap.AutoSettingConsts.MODE_TIME;
-import static com.android.internal.util.yaap.AutoSettingConsts.MODE_MIXED_SUNSET;
-import static com.android.internal.util.yaap.AutoSettingConsts.MODE_MIXED_SUNRISE;
-
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
@@ -50,18 +44,12 @@ import com.yaap.device.DeviceSettings.ModeSwitch.ReadingModeSwitch;
 public class DeviceSettings extends PreferenceFragment implements
         Preference.OnPreferenceChangeListener, SharedPreferences.OnSharedPreferenceChangeListener {
 
-    private static final String KEY_CATEGORY_CAMERA = "camera";
     private static final String KEY_HBM_SWITCH = "hbm";
 
     private static final String KEY_REFRESH_RATE = "refresh_rate";
-    private static final String KEY_ALWAYS_CAMERA_DIALOG = "always_on_camera_dialog";
     public static final String KEY_FPS_INFO = "fps_info";
 
     public static final String KEY_SETTINGS_PREFIX = "device_setting_";
-
-    private static final String POPUP_HELPER_PKG_NAME = "org.lineageos.camerahelper";
-
-    private static final String DC_SCHEDULE_KEY = "dc_schedule";
 
     private AmbientDisplayConfiguration mAmbientDisplayConfiguration;
 
@@ -69,11 +57,9 @@ public class DeviceSettings extends PreferenceFragment implements
     private TwoStatePreference mHBMModeSwitch;
     private TwoStatePreference mRefreshRate;
     private SwitchPreferenceCompat mFpsInfo;
-    private SwitchPreferenceCompat mAlwaysCameraSwitch;
     private SwitchPreferenceCompat mMuteMediaSwitch;
     private SwitchPreferenceCompat mSliderDialogSwitch;
     private SwitchPreferenceCompat mSliderDozeSwitch;
-    private Preference mDCSchedulePref;
     private ListPreference mReadingMode;
 
     private boolean mInternalFpsStart = false;
@@ -189,21 +175,6 @@ public class DeviceSettings extends PreferenceFragment implements
         mFpsInfo.setChecked(isFPSOverlayRunning());
         mFpsInfo.setOnPreferenceChangeListener(this);
 
-        PreferenceCategory mCameraCategory = findPreference(KEY_CATEGORY_CAMERA);
-        boolean hasPopup = Utils.isPackageInstalled(POPUP_HELPER_PKG_NAME, getContext());
-        if (hasPopup) {
-            mAlwaysCameraSwitch = findPreference(KEY_ALWAYS_CAMERA_DIALOG);
-            boolean enabled = Settings.System.getInt(getContext().getContentResolver(),
-                    KEY_SETTINGS_PREFIX + KEY_ALWAYS_CAMERA_DIALOG, 0) == 1;
-            mAlwaysCameraSwitch.setChecked(enabled);
-            mAlwaysCameraSwitch.setOnPreferenceChangeListener(this);
-        } else {
-            mCameraCategory.setVisible(false);
-        }
-
-        mDCSchedulePref = findPreference(DC_SCHEDULE_KEY);
-        updateDCScheduleSummary();
-
         // Registering observers
         final SharedPreferences prefs = Constants.getDESharedPrefs(getContext());
         prefs.registerOnSharedPreferenceChangeListener(this);
@@ -221,7 +192,6 @@ public class DeviceSettings extends PreferenceFragment implements
         super.onResume();
         mHBMModeSwitch.setChecked(HBMModeSwitch.isCurrentlyEnabled());
         mFpsInfo.setChecked(isFPSOverlayRunning());
-        updateDCScheduleSummary();
     }
 
     @Override
@@ -233,11 +203,6 @@ public class DeviceSettings extends PreferenceFragment implements
             Intent fpsinfo = new Intent(getContext(), FPSInfoService.class);
             if (enabled) getContext().startService(fpsinfo);
             else getContext().stopService(fpsinfo);
-        } else if (preference == mAlwaysCameraSwitch) {
-            boolean enabled = (Boolean) newValue;
-            Settings.System.putInt(resolver,
-                    KEY_SETTINGS_PREFIX + KEY_ALWAYS_CAMERA_DIALOG,
-                    enabled ? 1 : 0);
         } else if (preference == mRefreshRate) {
             Boolean enabled = (Boolean) newValue;
             RefreshRateSwitch.setPeakRefresh(getContext(), enabled);
@@ -297,30 +262,6 @@ public class DeviceSettings extends PreferenceFragment implements
     private boolean isFPSOverlayRunning() {
         final SharedPreferences prefs = Constants.getDESharedPrefs(getContext());
         return prefs.getBoolean(FPSInfoService.PREF_KEY_FPS_STATE, false);
-    }
-
-    private void updateDCScheduleSummary() {
-        if (mDCSchedulePref == null) return;
-        int mode = Settings.Secure.getIntForUser(getActivity().getContentResolver(),
-                Settings.Secure.DC_DIM_AUTO_MODE, 0, UserHandle.USER_CURRENT);
-        switch (mode) {
-            default:
-            case MODE_DISABLED:
-                mDCSchedulePref.setSummary(R.string.disabled);
-                break;
-            case MODE_NIGHT:
-                mDCSchedulePref.setSummary(R.string.dc_schedule_twilight);
-                break;
-            case MODE_TIME:
-                mDCSchedulePref.setSummary(R.string.dc_schedule_custom);
-                break;
-            case MODE_MIXED_SUNSET:
-                mDCSchedulePref.setSummary(R.string.dc_schedule_mixed_sunset);
-                break;
-            case MODE_MIXED_SUNRISE:
-                mDCSchedulePref.setSummary(R.string.dc_schedule_mixed_sunrise);
-                break;
-        }
     }
 
     private void updateSliderEnablement() {

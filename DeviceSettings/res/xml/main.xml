@@ -19,15 +19,6 @@
         android:summary="@string/dc_mode_summary"
         android:title="@string/dc_mode_title" />
 
-    <Preference
-        android:key="dc_schedule"
-        android:title="@string/dc_schedule_title"
-        android:persistent="false" >
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.yaap.device.DeviceSettings"
-                android:targetClass="com.yaap.device.DeviceSettings.DCDimScheduleSettings" />
-    </Preference>
-
     <SwitchPreferenceCompat
         android:key="hbm"
         android:summary="@string/hbm_mode_summary"
@@ -53,16 +44,6 @@
         android:entries="@array/reading_mode_entries"
         android:entryValues="@array/reading_mode_values"
         android:defaultValue="0" />
-
-    <Preference
-        android:key="touchscreen_gesture_category"
-        android:title="@string/touchscreen_gesture_settings_title"
-        android:summary="@string/touchscreen_gesture_settings_summary"
-        android:persistent="false" >
-        <intent android:action="android.intent.action.MAIN"
-                android:targetPackage="com.yaap.device.DeviceSettings"
-                android:targetClass="com.yaap.device.DeviceSettings.TouchscreenGestureSettings" />
-    </Preference>
 
     <PreferenceCategory
         android:key="slider"
@@ -111,17 +92,6 @@
             android:title="@string/slider_doze_enabled_title"
             android:summary="@string/slider_doze_enabled_summary"
             android:defaultValue="true"
-            android:persistent="false" />
-    </PreferenceCategory>
-
-    <PreferenceCategory
-        android:key="camera"
-        android:title="@string/camera_title">
-        <SwitchPreferenceCompat
-            android:key="always_on_camera_dialog"
-            android:title="@string/always_on_camera_dialog_title"
-            android:summaryOff="@string/always_on_camera_dialog_summary_off"
-            android:summaryOn="@string/always_on_camera_dialog_summary_on"
             android:persistent="false" />
     </PreferenceCategory>
 
