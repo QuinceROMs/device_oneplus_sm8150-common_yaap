@@ -90,6 +90,9 @@
     <!-- Whether key handler sends intent when changing slider position -->
     <string name="config_alertSliderIntent">com.bliss.device.DeviceSettings.UPDATE_SLIDER</string>
 
+    <!-- Whether device supports in-display fingerprint -->
+    <bool name="config_supportsUdfps">true</bool>
+
     <!-- Whether the device supports Smart Pixels -->
     <bool name="config_supportSmartPixels">true</bool>
 
