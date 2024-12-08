@@ -117,7 +117,7 @@ PRODUCT_PACKAGES += \
     AntHalService-Soong \
     com.dsi.ant@1.0.vendor
 
-# YAAP Device Settings
+# BlissROMs Device Settings
 PRODUCT_PACKAGES += \
     DeviceSettings
 
