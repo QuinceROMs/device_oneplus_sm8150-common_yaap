@@ -478,7 +478,7 @@
         <item>"/system/system_ext/lib64/liblayerext.qti.so"</item>
         <item>"/system/system_ext/lib64/libpenguin.so"</item>
         <item>"/system/system_ext/lib64/libpenguin_impl.so"</item>
-        <item>"/system/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system/system_ext/priv-app/BlissSystemUI/BlissSystemUI.apk"</item>
         <item>"/vendor/lib64/libcamxexternalformatutils.so"</item>
         <item>"/vendor/lib64/libipebpsstriping170.so"</item>
         <item>"/vendor/lib64/libipebpsstriping.so"</item>
@@ -516,7 +516,7 @@
         <item>"/apex/com.android.art/javalib/core-oj.jar"</item>
         <item>"/apex/com.android.art/javalib/core-libart.jar"</item>
         <item>"/apex/com.android.media/javalib/updatable-media.jar"</item>
-        <item>"/system_ext/priv-app/SystemUI/SystemUI.apk"</item>
+        <item>"/system_ext/priv-app/BlissSystemUI/BlissSystemUI.apk"</item>
         <item>"/system/bin/surfaceflinger"</item>
     </string-array>
 
@@ -541,13 +541,13 @@
      <string name="config_systemTelephonyPackage" translatable="false">com.qualcomm.qti.cne</string>
 
     <!-- Type of the udfps long press sensor. Empty if long press is not supported. -->
-    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.yaap.sensor.udfps</string>
+    <string name="config_dozeUdfpsLongPressSensorType" translatable="false">org.bliss.sensor.udfps</string>
 
     <!-- Type of the double tap sensor. Empty if double tap is not supported. -->
-    <string name="config_dozeDoubleTapSensorType" translatable="false">org.yaap.sensor.double_tap</string>
+    <string name="config_dozeDoubleTapSensorType" translatable="false">org.bliss.sensor.double_tap</string>
 
     <!-- Type of the tap sensor. Empty if tap is not supported. -->
-    <string name="config_dozeTapSensorType" translatable="false">org.yaap.sensor.tap</string>
+    <string name="config_dozeTapSensorType" translatable="false">org.bliss.sensor.tap</string>
 
     <!-- Auto-brightness sensor type string -->
     <string name="config_displayLightSensorType">"android.sensor.light"</string>
