@@ -68,13 +68,16 @@ void updateScreenBuffer() {
 
     DisplayCaptureArgs captureArgs;
     captureArgs.displayToken = getInternalDisplayToken();
-    captureArgs.pixelFormat = PixelFormat::RGBA_8888;
-    captureArgs.sourceCrop = Rect(
-            ALS_POS_X - ALS_RADIUS, ALS_POS_Y - ALS_RADIUS,
-            ALS_POS_X + ALS_RADIUS, ALS_POS_Y + ALS_RADIUS);
+    captureArgs.captureArgs.pixelFormat = static_cast<int>(android::PIXEL_FORMAT_RGBA_8888);
+    android::gui::ARect rect;
+    rect.left = ALS_POS_X - ALS_RADIUS;
+    rect.top = ALS_POS_Y - ALS_RADIUS;
+    rect.right = ALS_POS_X + ALS_RADIUS;
+    rect.bottom = ALS_POS_Y + ALS_RADIUS;
+    captureArgs.captureArgs.sourceCrop = rect;
     captureArgs.width = ALS_RADIUS * 2;
     captureArgs.height = ALS_RADIUS * 2;
-    captureArgs.captureSecureLayers = true;
+    captureArgs.captureArgs.captureSecureLayers = true;
 
     DisplayState state;
     SurfaceComposerClient::getDisplayState(display, &state);
