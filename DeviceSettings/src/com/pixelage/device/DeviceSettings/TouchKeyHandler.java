@@ -195,13 +195,5 @@ public class TouchKeyHandler implements DeviceKeyHandler {
         if (mVibrator == null || !mVibrator.hasVibrator()) {
             return;
         }
-
-        if (mAudioManager.getRingerMode() != AudioManager.RINGER_MODE_SILENT) {
-            final boolean enabled = Settings.System.getInt(mContext.getContentResolver(),
-                    Settings.System.TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK, 1) != 0;
-            if (enabled) {
-                mVibrator.vibrate(VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK));
-            }
-        }
     }
 }
