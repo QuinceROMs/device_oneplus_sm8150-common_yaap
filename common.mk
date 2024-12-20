@@ -200,6 +200,9 @@ PRODUCT_PACKAGES += \
     vendor.oneplus.hardware.camera@1.0.vendor:64 \
     vendor.qti.hardware.camera.device@1.0.vendor:64
 
+PRODUCT_PACKAGES += \
+    GrapheneCamera
+
 # Common init scripts
 PRODUCT_PACKAGES += \
     init.class_main.sh \
