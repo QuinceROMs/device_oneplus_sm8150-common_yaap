@@ -163,7 +163,7 @@ public class DeviceSettings extends PreferenceFragment implements
             getPreferenceScreen().removePreference(findPreference(KEY_REFRESH_RATE));
         }
 
-        if (ReadingModeSwitch.isSupported()) {
+        if (ReadingModeSwitch.isSupported(getContext())) {
             mReadingMode = findPreference(ReadingModeSwitch.KEY_READING_SWITCH);
             mReadingMode.setValue(String.valueOf(ReadingModeSwitch.getState(getContext())));
             mReadingMode.setOnPreferenceChangeListener(this);

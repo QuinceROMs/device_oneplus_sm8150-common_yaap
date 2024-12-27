@@ -90,7 +90,7 @@ public class ReadingModeTileService extends TileService
     }
 
     private static void setLabelByState(Context context, Tile tile, int state) {
-        if (!ReadingModeSwitch.isSupported()) return;
+        if (!ReadingModeSwitch.isSupported(context)) return;
         String label = context.getString(R.string.off);
         if (state == ReadingModeSwitch.STATE_ENABLED)
             label = context.getString(R.string.enabled);
@@ -101,7 +101,7 @@ public class ReadingModeTileService extends TileService
 
     private static void setTileStateByState(Context context, Tile tile, int state) {
         int tileState = Tile.STATE_INACTIVE;
-        if (!ReadingModeSwitch.isSupported())
+        if (!ReadingModeSwitch.isSupported(context))
             tileState = Tile.STATE_UNAVAILABLE;
         else if (state != ReadingModeSwitch.STATE_DISABLED)
             tileState = Tile.STATE_ACTIVE;

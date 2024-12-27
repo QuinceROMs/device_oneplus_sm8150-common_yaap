@@ -20,16 +20,12 @@ import android.content.Context;
 import android.os.Build;
 
 import com.pixelage.device.DeviceSettings.Constants;
+import com.pixelage.device.DeviceSettings.R;
 import com.pixelage.device.DeviceSettings.Utils;
 
 public class ReadingModeSwitch {
 
     private static final String FILE = "/sys/devices/platform/soc/ae00000.qcom,mdss_mdp/drm/card0/card0-DSI-1/reading";
-
-    private static final String[] SUPPORTED_DEVICES = {
-        "OnePlus7T",
-        "OnePlus7"
-    };
 
     public static final String KEY_READING_SWITCH = "reading_mode";
     public static final int STATE_DISABLED = 0;
@@ -43,14 +39,9 @@ public class ReadingModeSwitch {
         return null;
     }
 
-    public static boolean isSupported() {
-        boolean deviceSupported = false;
-        for (String str : SUPPORTED_DEVICES) {
-            if (Build.DEVICE.equals(str)) {
-                deviceSupported = true;
-                break;
-            }
-        }
+    public static boolean isSupported(Context context) {
+        boolean deviceSupported = context.getResources().getBoolean(
+                R.bool.supports_reading_mode);
         return deviceSupported && Utils.fileWritable(getFile());
     }
 

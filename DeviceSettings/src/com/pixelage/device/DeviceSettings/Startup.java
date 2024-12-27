@@ -18,6 +18,7 @@
 package com.pixelage.device.DeviceSettings;
 
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
 import static android.content.Intent.ACTION_BOOT_COMPLETED;
 import static android.content.Intent.ACTION_LOCKED_BOOT_COMPLETED;
 
@@ -43,6 +44,7 @@ public class Startup extends BroadcastReceiver {
     private static final String KEY_MIGRATION_DONE = "migration_done_2";
     private static final String PKG_NAME = "com.pixelage.device.DeviceSettings";
     private static final String READING_TILE_CLASS_NAME = PKG_NAME + ".ReadingModeTileService";
+    private static final String REFRESH_TILE_CLASS_NAME = PKG_NAME + ".RefreshRateTileService";
 
     private static final Map<String, String> sKeyFileMap = Map.of(
         // DC Dimming
@@ -78,13 +80,15 @@ public class Startup extends BroadcastReceiver {
             }
 
             // disable unavailable tiles
-            if (!ReadingModeSwitch.isSupported()) {
-                PackageManager pm = context.getPackageManager();
-                ComponentName cn = new ComponentName(PKG_NAME, READING_TILE_CLASS_NAME);
-                final int enabledSetting = pm.getComponentEnabledSetting(cn);
-                if (enabledSetting != COMPONENT_ENABLED_STATE_DISABLED)
-                    pm.setComponentEnabledSetting(cn, COMPONENT_ENABLED_STATE_DISABLED, 0);
-            }
+            PackageManager pm = context.getPackageManager();
+            ComponentName cn = new ComponentName(PKG_NAME, READING_TILE_CLASS_NAME);
+            int state = ReadingModeSwitch.isSupported(context)
+                    ? COMPONENT_ENABLED_STATE_ENABLED : COMPONENT_ENABLED_STATE_DISABLED;
+            pm.setComponentEnabledSetting(cn, state, 0);
+            cn = new ComponentName(PKG_NAME, REFRESH_TILE_CLASS_NAME);
+            state = context.getResources().getBoolean(R.bool.config_deviceHasHighRefreshRate)
+                    ? COMPONENT_ENABLED_STATE_ENABLED : COMPONENT_ENABLED_STATE_DISABLED;
+            pm.setComponentEnabledSetting(cn, state, 0);
         }
 
         // restoring state from DE shared preferences
